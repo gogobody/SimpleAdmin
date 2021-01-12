@@ -26,6 +26,7 @@ class Simple{
     init(){
         this.global_init()
         this.header_cat_init()
+
         this.manages_pages_init()
         this.comments_page_init()
         this.copyright_init()
@@ -38,7 +39,7 @@ class Simple{
 
         this.managetags_page_init()
         this.manages_plugins_init()
-
+        this.mobile_nav_init()
 
     }
     global_init(){
@@ -363,6 +364,25 @@ class Simple{
             let tmpHtml = '<div class="typecho-page-title"><h2>网站概要</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
                 '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先生</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p></div></div>';
             $(".typecho-dashboard").prepend(tmpHtml)
+        }
+    }
+    mobile_nav_init(){
+        if ($(window).width()< 768){
+            let color_select = $(".profile-color-modes.js-promo-color-modes-banner-profile")
+            let all_nodes = $(".typecho-head-nav .operate").children()
+            let nodes_len = all_nodes.length
+            let dropdown_ele = '<div class="dropdown" id="navmore" style="display: inline-block;margin-right: 3px"><a class="dropdown-toggle" href="#">更多</a><ul class="dropdown-menu" style="right: 0;left: auto">'
+            all_nodes.each(function (index,ele){
+                if (index>0 && index < nodes_len -1){ // 去掉首尾节点留作备用
+                    dropdown_ele = dropdown_ele +'<li class="dropdown-item"><a>'+ $(ele).prop('outerHTML') +'</a></li>';
+                    $(ele).remove()
+                }
+            })
+            dropdown_ele = dropdown_ele + '</ul></div>'
+            color_select.after(dropdown_ele);
+            $('#navmore').children(".dropdown-toggle").click(function (e) {
+                $(this).parent(".dropdown").toggleClass("active")
+            })
         }
     }
 }
