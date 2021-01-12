@@ -12296,6 +12296,15 @@ table.typecho-list-table.deactivate {
   }
 }
 body{
+  #navmore{
+    .dropdown-menu{
+      background-color: var(--background);
+    }
+    a{
+      margin-left: 0!important;
+      background-color:var(--background) !important ;
+    }
+  }
   .main{
     .typecho-page-main{
       .typecho-option-tabs{

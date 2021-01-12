@@ -362,7 +362,7 @@ class Simple{
     copyright_init(){
         if (MenuTitle === "网站概要"){
             let tmpHtml = '<div class="typecho-page-title"><h2>网站概要</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
-                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先生</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p></div></div>';
+                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p></div></div>';
             $(".typecho-dashboard").prepend(tmpHtml)
         }
     }
@@ -371,10 +371,14 @@ class Simple{
             let color_select = $(".profile-color-modes.js-promo-color-modes-banner-profile")
             let all_nodes = $(".typecho-head-nav .operate").children()
             let nodes_len = all_nodes.length
-            let dropdown_ele = '<div class="dropdown" id="navmore" style="display: inline-block;margin-right: 3px"><a class="dropdown-toggle" href="#">更多</a><ul class="dropdown-menu" style="right: 0;left: auto">'
+            let dropdown_ele = '<div class="dropdown" id="navmore" style="display: inline-block;margin-right: 3px"><a style="background-color: var(--backgroundA)!important;" class="dropdown-toggle" href="#">更多</a><ul class="dropdown-menu" style="right: 0;left: auto">'
             all_nodes.each(function (index,ele){
                 if (index>0 && index < nodes_len -1){ // 去掉首尾节点留作备用
-                    dropdown_ele = dropdown_ele +'<li class="dropdown-item"><a>'+ $(ele).prop('outerHTML') +'</a></li>';
+                    if ($(ele).is('a')){
+                        dropdown_ele = dropdown_ele +'<li class="dropdown-item">'+ $(ele).prop('outerHTML') +'</li>';
+                    }else{
+                        dropdown_ele = dropdown_ele +'<li class="dropdown-item"><a>'+ $(ele).prop('outerHTML') +'</a></li>';
+                    }
                     $(ele).remove()
                 }
             })
