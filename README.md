@@ -3,9 +3,15 @@ SimpleAdmin 是一款即插即用的typecho后台美化插件，gogobody修改�
 
 登录界面修改自泽泽站长（qqdie）的登录插件。
 
+## 注意
+
+上传插件后请改名为 SimpleAdmin ，否则启用不了
+
+----
+
 下载：
 
-[hide]https://github.com/gogobody/SimpleAdmin.git[/hide]
+https://github.com/gogobody/SimpleAdmin/archive/main.zip
 
 
 ## 特色：
