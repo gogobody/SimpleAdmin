@@ -169,12 +169,12 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             <script>
                 const UserLink_="' . Helper::options()->adminUrl . '/profile.php";
                 const UserPic_="' . $tx . '";
-                const AdminLink="' . Helper::options()->adminUrl . '";
-                const SiteLink="' . Helper::options()->siteUrl . '";
-                const UserName="' . $user->screenName . '";
-                const UserGroup="' . $user->group . '";
-                const SiteName="' . Helper::options()->title . '";
-                const MenuTitle="' . strip_tags($menu->title) . '";
+                const AdminLink_="' . Helper::options()->adminUrl . '";
+                const SiteLink_="' . Helper::options()->siteUrl . '";
+                const UserName_="' . $user->screenName . '";
+                const UserGroup_="' . $user->group . '";
+                const SiteName_="' . Helper::options()->title . '";
+                const MenuTitle_="' . strip_tags($menu->title) . '";
             </script>';
         }
         return $hed;

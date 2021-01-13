@@ -76,18 +76,18 @@ class Simple{
         }
         let Mask = '<div class="mask"></div>';
         $("body div.main").prepend(Mask)
-        let UserInfo = "<div class=\"user-info\"><a href=\"" + AdminLink + "\"><img src=\"" + UserPic_ + "s=100\" /></a><p>欢迎您，<a href=\"" + AdminLink + "\">" + UserName + "</a></p></div>";
+        let UserInfo = "<div class=\"user-info\"><a href=\"" + AdminLink_ + "\"><img src=\"" + UserPic_ + "s=100\" /></a><p>欢迎您，<a href=\"" + AdminLink_ + "\">" + UserName_ + "</a></p></div>";
         let HtmlText = ""
-        if (UserGroup === "administrator") {
-            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink + "index.php\"><i class=\"zm zm-zu\"></i>主控制台</a></li><li><a href=\"" + AdminLink + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-quanjushuxing\"></i>全局模块<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + one + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-zhuomiankuaijiefangshi\"></i>快捷操作<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + two + "</li></ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-leibie\"></i>内容管理<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + three + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-shezhi\"></i>网站设置<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + four + "</ul><li>" + five + "</ul></div>";
-        } else if (UserGroup === "editor" || UserGroup === "contributor") {
-            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li><li><a href=\"" + AdminLink + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li><a href=\"" + AdminLink + "manage-posts.php\"><i class=\"fa fa-cube\"></i>管理文章</a></li><li><a href=\"" + AdminLink + "/manage-comments.php\"><i class=\"fa fa-comments-o\"></i>管理评论</a></li></ul></div>";
+        if (UserGroup_ === "administrator") {
+            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"zm zm-zu\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-quanjushuxing\"></i>全局模块<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + one + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-zhuomiankuaijiefangshi\"></i>快捷操作<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + two + "</li></ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-leibie\"></i>内容管理<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + three + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-shezhi\"></i>网站设置<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + four + "</ul><li>" + five + "</ul></div>";
+        } else if (UserGroup_ === "editor" || UserGroup_ === "contributor") {
+            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li><li><a href=\"" + AdminLink_ + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li><a href=\"" + AdminLink_ + "manage-posts.php\"><i class=\"fa fa-cube\"></i>管理文章</a></li><li><a href=\"" + AdminLink_ + "/manage-comments.php\"><i class=\"fa fa-comments-o\"></i>管理评论</a></li></ul></div>";
         } else {
-            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li></ul></div>";
+            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li></ul></div>";
         }
         let NavHtml = UserInfo + HtmlText;
         let Nav = document.getElementById('typecho-nav-list');
-        if (UserGroup !== "") {
+        if (UserGroup_ !== "") {
             globalVars.ty_nav_list.html(NavHtml);
             let ToMain = getElementsClass("operate")[0];
             let Main = getElementsClass("main")[0];
@@ -132,7 +132,7 @@ class Simple{
                     $(".main .mask").toggleClass("active")
                 }
             }
-            if (MenuTitle === "个人设置") {
+            if (MenuTitle_ === "个人设置") {
                 let avatar = getElementsClass("profile-avatar")[0];
                 avatar.setAttribute("src", UserPic_ + "s=640");
                 avatar.style.width = "150px";
@@ -143,7 +143,7 @@ class Simple{
             let Cover = document.createElement('div');
             Cover.id = "cover";
             Body.appendChild(Cover);
-            LoginMain.innerHTML = "<img src=\"" + SiteLink + "img/logo.png\" alt=\"" + SiteName + "\"/>";
+            LoginMain.innerHTML = "<img src=\"" + SiteLink_ + "img/logo.png\" alt=\"" + SiteName_ + "\"/>";
         }
 
         globalVars.ty_nav_list.find('li.focus').each(function () {
@@ -169,7 +169,7 @@ class Simple{
         $('.typecho-list-table').find('colgroup').each(function () {
             $(this).remove();
         });
-        if (MenuTitle === "网站概要") {
+        if (MenuTitle_ === "网站概要") {
             globalVars.ty_page_main.find('li:eq(0) a').html("撰写文章");
             globalVars.ty_page_main.find('div:eq(1)').addClass("col-tb-6").removeClass("col-tb-4");
             globalVars.ty_page_main.find('div:eq(2)').addClass("col-tb-6").removeClass("col-tb-4");
@@ -178,14 +178,14 @@ class Simple{
             });
         }
         let ty_list_table_tr = $('.typecho-list-table tr')
-        if (MenuTitle === "插件管理") {
+        if (MenuTitle_ === "插件管理") {
             $("body").addClass("manageplugins")
             ty_list_table_tr.find('td:eq(0)').attr("data-label", "名称：");
             ty_list_table_tr.find('td:eq(1)').attr("data-label", "描述：");
             ty_list_table_tr.find('td:eq(2)').attr("data-label", "版本：");
             ty_list_table_tr.find('td:eq(3)').attr("data-label", "作者：");
             ty_list_table_tr.find('td:eq(4)').attr("data-label", "操作：");
-        } else if (MenuTitle === "管理文章") {
+        } else if (MenuTitle_ === "管理文章") {
             $("body").addClass("manageposts")
             ty_list_table_tr.find('th:eq(1)').text("评论");
             ty_list_table_tr.find('td:eq(1)').attr("data-label", "评论：");
@@ -193,7 +193,7 @@ class Simple{
             ty_list_table_tr.find('td:eq(3)').attr("data-label", "作者：");
             ty_list_table_tr.find('td:eq(4)').attr("data-label", "分类：");
             ty_list_table_tr.find('td:eq(5)').attr("data-label", "日期：");
-        } else if (MenuTitle === "管理页面") {
+        } else if (MenuTitle_ === "管理页面") {
             $("body").addClass("managepages")
             ty_list_table_tr.find('th:eq(1)').text("评论");
             ty_list_table_tr.find('td:eq(1)').attr("data-label", "评论：");
@@ -201,22 +201,22 @@ class Simple{
             ty_list_table_tr.find('td:eq(3)').attr("data-label", "缩略名：");
             ty_list_table_tr.find('td:eq(4)').attr("data-label", "作者：");
             ty_list_table_tr.find('td:eq(5)').attr("data-label", "日期：");
-        } else if (MenuTitle === "管理评论") {
+        } else if (MenuTitle_ === "管理评论") {
             ty_list_table_tr.find('td:eq(2)').attr("data-label", "评论者：");
             ty_list_table_tr.find('td:eq(3)').attr("data-label", "发表于：");
-        } else if (MenuTitle === "管理分类") {
+        } else if (MenuTitle_ === "管理分类") {
             ty_list_table_tr.find('td:eq(1)').attr("data-label", "名称：");
             ty_list_table_tr.find('td:eq(2)').attr("data-label", "子分类：");
             ty_list_table_tr.find('td:eq(3)').attr("data-label", "缩略名：");
             ty_list_table_tr.find('td:eq(5)').attr("data-label", "文章数：");
-        } else if (MenuTitle === "管理用户") {
+        } else if (MenuTitle_ === "管理用户") {
             ty_list_table_tr.find('th:eq(1)').text("文章数");
             ty_list_table_tr.find('td:eq(1)').attr("data-label", "文章数：");
             ty_list_table_tr.find('td:eq(2)').attr("data-label", "用户名：");
             ty_list_table_tr.find('td:eq(3)').attr("data-label", "昵称：");
             ty_list_table_tr.find('td:eq(4)').attr("data-label", "邮件：");
             ty_list_table_tr.find('td:eq(5)').attr("data-label", "用户组：");
-        } else if (MenuTitle === "管理标签") {
+        } else if (MenuTitle_ === "管理标签") {
             $("body").addClass("managetags")
         }
     }
@@ -360,7 +360,7 @@ class Simple{
         $("body.manageplugins .typecho-list-table tbody tr").addClass("card shadow-sm")
     }
     copyright_init(){
-        if (MenuTitle === "网站概要"){
+        if (MenuTitle_ === "网站概要"){
             let tmpHtml = '<div class="typecho-page-title"><h2>网站概要</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
                 '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p></div></div>';
             $(".typecho-dashboard").prepend(tmpHtml)

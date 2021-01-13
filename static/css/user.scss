@@ -1,4 +1,7 @@
 @charset "utf-8";
+*{
+  box-sizing: inherit;
+}
 /**
 aqua.css
  */
@@ -12361,7 +12364,15 @@ body {
     }
   }
 }
-
+/**
+ * joe 主题后台适配
+ */
+.j-setting-contain .j-setting-notice,.j-setting-contain .j-aside{
+  background-color: var(--backgroundA)!important;
+}
+/**
+ * joe 主题后台适配  end
+ */
 @media all and (min-width: 1000px) {
   .popup {
     top: 50px !important;
