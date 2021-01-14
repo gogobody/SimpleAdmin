@@ -12335,6 +12335,10 @@ body{
     .typecho-page-main{
       .typecho-option-tabs{
         display: flex;
+        a{
+          white-space: nowrap;
+        }
+
       }
       .typecho-list{
         .clearfix{
@@ -12558,6 +12562,9 @@ body {
       }
     }
 
+  }
+  .typecho-list-table tr td .hidden-by-mouse{
+    opacity: 1!important;
   }
 }
 

@@ -18,6 +18,36 @@ function getElementsClass(classnames) {
     }
     return classobj;
 }
+class SimpleUtils {
+    constructor() {
+    }
+    static getVersion(){
+        return '1.0.4';
+    }
+    static update_detec() {
+        let container = document.getElementById('check-update');
+        let ajax = new XMLHttpRequest();
+        container.style.display = 'block';
+        ajax.open('get', 'https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest');
+        ajax.send();
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState === 4 && ajax.status === 200) {
+                let obj = JSON.parse(ajax.responseText);
+                let newest = obj.tag_name;
+                console.log(newest,SimpleUtils.getVersion())
+                if (newest > SimpleUtils.getVersion()) {
+                    container.innerHTML =
+                        '发现新主题版本：' + obj.name +
+                        '。下载地址：<a href="' + obj.zipball_url + '">点击下载</a>' +
+                        '<br>您目前的版本:' + String(SimpleUtils.getVersion()) + '。' +
+                        '<a target="_blank" href="' + obj.html_url + '">👉查看新版亮点</a>';
+                } else {
+                    container.innerHTML = '您目前使用的是最新版主题。';
+                }
+            }
+        }
+    }
+}
 
 class Simple{
     constructor() {
@@ -41,6 +71,7 @@ class Simple{
         this.manages_plugins_init()
         this.mobile_nav_init()
 
+        SimpleUtils.update_detec()
     }
     global_init(){
         let childCount = globalVars.ty_nav_list.children('.root').size();
@@ -361,8 +392,9 @@ class Simple{
     }
     copyright_init(){
         if (MenuTitle_ === "网站概要"){
-            let tmpHtml = '<div class="typecho-page-title"><h2>网站概要</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
-                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p></div></div>';
+            let tmpHtml = '<div class="typecho-page-title"><h2>插件说明</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
+                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p>' +
+                '<p id="check-update"></p></div></div>';
             $(".typecho-dashboard").prepend(tmpHtml)
         }
     }
@@ -389,6 +421,7 @@ class Simple{
             })
         }
     }
+
 }
 let Comments_page = {
     filter_comments:function () {
