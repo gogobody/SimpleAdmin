@@ -12335,6 +12335,7 @@ body{
     .typecho-page-main{
       .typecho-option-tabs{
         display: flex;
+        flex-wrap: wrap;
         a{
           white-space: nowrap;
         }
@@ -12566,6 +12567,10 @@ body {
   .typecho-list-table tr td .hidden-by-mouse{
     opacity: 1!important;
   }
+  .typecho-option-tabs a{
+    padding: 0 7px;
+  }
+
 }
 
 @media all and (max-width: 360px) {

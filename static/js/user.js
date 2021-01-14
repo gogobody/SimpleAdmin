@@ -26,6 +26,7 @@ class SimpleUtils {
     }
     static update_detec() {
         let container = document.getElementById('check-update');
+        if (!container) return;
         let ajax = new XMLHttpRequest();
         container.style.display = 'block';
         ajax.open('get', 'https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest');
