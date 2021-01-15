@@ -35,7 +35,6 @@ class SimpleUtils {
             if (ajax.readyState === 4 && ajax.status === 200) {
                 let obj = JSON.parse(ajax.responseText);
                 let newest = obj.tag_name;
-                console.log(newest,SimpleUtils.getVersion())
                 if (newest > SimpleUtils.getVersion()) {
                     container.innerHTML =
                         '发现新主题版本：' + obj.name +
