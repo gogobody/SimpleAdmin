@@ -22,7 +22,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.0.4';
+        return '1.0.5';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -42,7 +42,7 @@ class SimpleUtils {
                         '<br>您目前的版本:' + String(SimpleUtils.getVersion()) + '。' +
                         '<a target="_blank" href="' + obj.html_url + '">👉查看新版亮点</a>';
                 } else {
-                    container.innerHTML = '您目前使用的是最新版主题。';
+                    container.innerHTML = '您目前的版本:' + String(SimpleUtils.getVersion()) + '。' + '您目前使用的是最新版主题。';
                 }
             }
         }
@@ -67,6 +67,7 @@ class Simple{
         this.table_init()
         this.dropdown_init()
 
+        this.admin_index_page_init()
         this.managetags_page_init()
         this.manages_plugins_init()
         this.mobile_nav_init()
@@ -254,9 +255,11 @@ class Simple{
     comments_page_init(){
         Comments_page.filter_comments()
     }
-
     managetags_page_init(){
         Managetags_page.tags_init()
+    }
+    admin_index_page_init(){
+        Admin_index_page.init()
     }
     header_cat_init(){
         // cat init
@@ -335,7 +338,7 @@ class Simple{
         $("input[type=checkbox]").each(function (index,ele) {
             if (!$(ele).hasClass("form-check-input")){
                 $(ele).addClass("form-check-input")
-                $(ele).parent("li").addClass("form-check")
+                $(ele).parent().addClass("form-check")
                 $(ele).next("label").addClass("form-check-label")
             }
         })
@@ -369,6 +372,15 @@ class Simple{
         $("select").each(function (index,ele){
             let tmp = $(ele).prop("outerHTML");
             $(ele).prop('outerHTML','<li class="select">'+tmp+"</li>")
+            // 自动隐藏密码框
+            $('#visibility').change(function () {
+                var val = $(this).val(), password = $('#post-password');
+                if ('password' === val) {
+                    password.removeClass('hidden');
+                } else {
+                    password.addClass('hidden');
+                }
+            });
         })
     }
     table_init(){
@@ -390,12 +402,13 @@ class Simple{
     manages_plugins_init(){
         $("body.manageplugins .typecho-list-table tbody tr").addClass("card shadow-sm")
     }
+    
     copyright_init(){
         if (MenuTitle_ === "网站概要"){
             let tmpHtml = '<div class="typecho-page-title"><h2>插件说明</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
-                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p>' +
+                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件。建议使用 php7 以上版本。</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p>' +
                 '<p id="check-update"></p></div></div>';
-            $(".typecho-dashboard").prepend(tmpHtml)
+            $(".typecho-dashboard").append(tmpHtml)
         }
     }
     mobile_nav_init(){
@@ -423,6 +436,23 @@ class Simple{
     }
 
 }
+let Admin_index_page ={
+    init:function () {
+        let start_link = $('#start-link')
+        let original_html = start_link.prop("outerHTML")
+        let html = '<div id="start-link" style="display:flex;flex-wrap: wrap">' +
+            `<ul class="card p-8 shadow-xl"><h3>内容管理：</h3><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_post}">撰写文章</a></li><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_page}">添加页面</a></li></ul>` +
+            `<ul class="card p-8 shadow-xl"><h3>主题管理：</h3><li class="btn btn-info btn-ghost btn-fill"><a href="${globalConfig.options_theme_page}">${globalConfig.theme} 主题设置</a></li><li class="btn btn-info btn-ghost btn-fill"><a href="${globalConfig.themes}">主题管理</a></li></ul>` +
+            `<ul class="card p-8 shadow-xl"><h3>其他：</h3><li class="btn btn-danger btn-ghost btn-fill"><a href="${globalConfig.plugins}">插件管理</a></li><li class="btn btn-danger btn-ghost btn-fill"><a href="${globalConfig.options_general}">系统设置</a></li></ul>` +
+            '</div>'
+        start_link.prop("outerHTML",html)
+        // tepass 适配
+        let tepass_icon = $('i.fa.fa-rmb')
+        $(tepass_icon[0]).prop("outerHTML",'<i class="iconfont icon-zhifu"></i>')
+        $(tepass_icon[1]).prop("outerHTML",'<i class="iconfont icon-huiyuan"></i>')
+    }
+}
+
 let Comments_page = {
     filter_comments:function () {
         let comments_form = $("form[name=manage_comments]")

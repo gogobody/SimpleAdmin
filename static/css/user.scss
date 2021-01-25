@@ -12261,19 +12261,17 @@ a {
   font-size: 1em
 }
 
-#start-link li {
-  padding: 8px;
-  margin: 8px;
-  background: #09f;
-  text-align: center
-}
 
 #start-link li:hover {
   background: #5562c1
 }
-
+#start-link ul{
+  margin-right: 18px;
+  background: var(--backgroundA);
+  box-shadow: 0 0 0 2px rgba(45,140,240,.2);
+}
 #start-link li a {
-  color: #fff;
+  color: var(--btn-color);;
   text-decoration: none
 }
 ul.token-input-list,.token-input-list, input[type=text], input[type=password], input[type=email], textarea{
@@ -12329,11 +12327,11 @@ table.typecho-list-table.deactivate {
 body{
   #navmore{
     .dropdown-menu{
-      background-color: var(--background);
+      background-color: var(--backgroundA);
     }
     a{
       margin-left: 0!important;
-      background-color:var(--background) !important ;
+      background-color:var(--backgroundA) !important ;
     }
   }
   .main{
@@ -12486,11 +12484,11 @@ body {
   table.typecho-list-table tr {
     margin-bottom: 10px;
     display: block;
+    box-shadow: 3px 6px 2px 0 rgba(0,0,0,.15), inset 1px 2px 0 0 #fff;
   }
   table.typecho-list-table td {
     display: block;
     text-align: left;
-    border-bottom: 1px dotted #ccc
   }
   a.balloon-button, a.balloon-button:hover {
     background: 0 0;
@@ -12503,6 +12501,9 @@ body {
     content: attr(data-label);
     float: left;
     text-transform: uppercase
+  }
+  .typecho-list-table td{
+    border-top: 0;
   }
 }
 
@@ -12575,7 +12576,17 @@ body {
   .typecho-option-tabs a{
     padding: 0 7px;
   }
+  #start-link{
+    ul{
+      padding: 1em!important;
+      margin: 4px 0;
+      width: 100%;
 
+      h3{
+        margin: 5px 0!important;
+      }
+    }
+  }
 }
 
 @media all and (max-width: 360px) {

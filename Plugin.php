@@ -6,7 +6,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  *
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.0.0
+ * @version 1.0.5
  * @link https://ijkxs.com
  */
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
@@ -163,18 +163,29 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             } else {
                 $tx = $url . 'img/user.png';
             }
+            $options = Helper::options();
             $hed = $hed . '
             <link rel="stylesheet" href="' . $url . 'css/user.min.css">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_1159885_cgwht2i4i9m.css">
+            <link rel="stylesheet" href="//at.alicdn.com/t/font_2348538_kz7l6lrb8h.css">
             <script>
-                const UserLink_="' . Helper::options()->adminUrl . '/profile.php";
+                const UserLink_="' . $options->adminUrl . '/profile.php";
                 const UserPic_="' . $tx . '";
-                const AdminLink_="' . Helper::options()->adminUrl . '";
-                const SiteLink_="' . Helper::options()->siteUrl . '";
+                const AdminLink_="' . $options->adminUrl . '";
+                const SiteLink_="' . $options->siteUrl . '";
                 const UserName_="' . $user->screenName . '";
                 const UserGroup_="' . $user->group . '";
-                const SiteName_="' . Helper::options()->title . '";
+                const SiteName_="' . $options->title . '";
                 const MenuTitle_="' . strip_tags($menu->title) . '";
+                const globalConfig = {
+                    theme:"'. $options->theme.'",
+                    write_post:"'. $options->adminUrl.'write-post.php'.'",
+                    write_page:"'. $options->adminUrl.'write-page.php'.'",
+                    options_theme_page:"'. $options->adminUrl.'options-theme.php'.'",
+                    themes:"'. $options->adminUrl.'themes.php'.'",
+                    plugins:"'. $options->adminUrl.'plugins.php'.'",
+                    options_general:"'. $options->adminUrl.'options-general.php'.'",
+                }
             </script>';
         }
         return $hed;
