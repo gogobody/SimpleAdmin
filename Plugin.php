@@ -2,12 +2,12 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 /**
- * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://ijkxs.com">即刻学术</a>
+ * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://www.ijkxs.com">即刻学术</a>
  *
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.0.5
- * @link https://ijkxs.com
+ * @version 1.0.6
+ * @link https://www.ijkxs.com
  */
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
 {
@@ -20,8 +20,8 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
      */
     public static function activate()
     {
-        Typecho_Plugin::factory('admin/header.php')->header = array('SimpleAdmin_Plugin', 'renderHeader');
-        Typecho_Plugin::factory('admin/footer.php')->end = array('SimpleAdmin_Plugin', 'renderFooter');
+        Typecho_Plugin::factory('admin/header.php')->header_1000 = array('SimpleAdmin_Plugin', 'renderHeader');
+        Typecho_Plugin::factory('admin/footer.php')->end_1000 = array('SimpleAdmin_Plugin', 'renderFooter');
         if (file_exists("var/Widget/Menu.php")) {
             //挂载menu.php
             rename("var/Widget/Menu.php", "var/Widget/Menu.php.bak");
@@ -125,8 +125,9 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
      * @return string
      * @throws Typecho_Exception
      */
-    public static function renderHeader($hed)
+    public static function renderHeader($hed,$new)
     {
+        $hed = !empty($new)?$new:$hed;
         $url = Helper::options()->pluginUrl . '/SimpleAdmin/static/';
         if (!Typecho_Widget::widget('Widget_User')->hasLogin()) {
             $skin = Typecho_Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgfengge;

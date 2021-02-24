@@ -22,7 +22,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.0.5';
+        return '1.0.6';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -406,7 +406,7 @@ class Simple{
     copyright_init(){
         if (MenuTitle_ === "网站概要"){
             let tmpHtml = '<div class="typecho-page-title"><h2>插件说明</h2></div><div class="row typecho-page-main"><div class="col-mb-12 welcome-board">' +
-                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件。建议使用 php7 以上版本。</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://ijkxs.com">即刻学术</p></a></p>' +
+                '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件。建议使用 php7 以上版本。</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://www.ijkxs.com">即刻学术</p></a></p>' +
                 '<p id="check-update"></p></div></div>';
             $(".typecho-dashboard").append(tmpHtml)
         }
