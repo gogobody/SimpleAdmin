@@ -166,7 +166,8 @@ class Simple{
             }
             if (MenuTitle_ === "个人设置") {
                 let avatar = getElementsClass("profile-avatar")[0];
-                avatar.setAttribute("src", UserPic_ + "s=640");
+                let tmppic = UserPic_.replace('s=100','s=640')
+                avatar.setAttribute("src", tmppic);
                 avatar.style.width = "150px";
             }
         } else {
