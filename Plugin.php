@@ -6,7 +6,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  *
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.0.6
+ * @version 1.0.7
  * @link https://www.ijkxs.com
  */
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
@@ -102,8 +102,66 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
         $bgUrl = new Typecho_Widget_Helper_Form_Element_Text('bgUrl', NULL, NULL, _t('自定义背景图'), _t('选中上方的基础样式后，可以在这里填写图片地址自定义背景图；<b>注意</b>：带有【动态】标识的风格不支持自定义背景图。'));
         $form->addInput($bgUrl);
 
-        $diycss = new Typecho_Widget_Helper_Form_Element_Textarea('diycss', NULL, NULL, '自定义样式', _t('上边的样式选择【空白样式】，然后在这里自己写css美化注册/登录页面；<b>注意</b>：该功能与【自定义背景图】功能冲突，使用该功能时如果想设置背景图请写css里面。'));
+        $diycss = new Typecho_Widget_Helper_Form_Element_Textarea('diycss', NULL, NULL, '自定义登录样式', _t('上边的样式选择【空白样式】，然后在这里自己写css美化注册/登录页面；<b>注意</b>：该功能与【自定义背景图】功能冲突，使用该功能时如果想设置背景图请写css里面。'));
         $form->addInput($diycss);
+
+        $avatar = new Typecho_Widget_Helper_Form_Element_Text('avatar', NULL, NULL, _t('左边栏头像'), _t('输入头像链接，默认取QQ头像'));
+        $form->addInput($avatar);
+
+        $diyadmincss = new Typecho_Widget_Helper_Form_Element_Textarea('diyadmincss', NULL, NULL, '自定义后台样式', _t("可以自定义后台css<br>一些主题自带的色系如下：要重写的话请在重写的css后加!important<br>举例：<br>:root, [data-color-mode=light] {<br>
+--backgroundA: red!important;<br>
+}<br>白天<br>:root, [data-color-mode=light] {<br>
+  color-scheme: light;<br>
+  --background: #f1f5f8;<br>
+  --backgroundA: #fff;<br>
+  --theme: #4770db;<br>
+  --element: #409eff;<br>
+  --classA: #dcdfe6;<br>
+  --classB: #e4e7ed;<br>
+  --classC: #ebeef5;<br>
+  --classD: #f2f6fc;<br>
+  --main: #303133;<br>
+  --routine: #606266;<br>
+  --minor: #6e7075;<br>
+  --seat: #c0c4cc;<br>
+  --success: #67c23a;<br>
+  --warning: #e6a23c;<br>
+  --danger: #f56c6c;<br>
+  --info: #909399;<br>
+  --WhiteDark: #fff;<br>
+  --WhiteDarkRe: #000;<br>
+  --box-shadow-weight: 4px 0 25px 0 #e5ecf2;<br>
+  --color-text-primary: #24292e;<br>
+  --color-bg-canvas: #fff;<br>
+
+  --toggle-thuumb-bg: #2f363d;<br>
+  --toggle-track-border: #d1d5da;<br>
+  --toggle-track-bg: #fff;<br>
+}<br>黑夜<br>
+[data-color-mode=dark] {<br>
+  color-scheme: dark;<br>
+  --background: #191919 !important;<br>
+  --backgroundA: #212121 !important;<br>
+  --WhiteDark: #000;<br>
+  --WhiteDarkRe: #fff;<br>
+  --box-shadow-weight: 1px 0 8px 0 #e5ecf2;<br>
+  --main: #aaa !important;<br>
+  --classC: rgba(0, 0, 0, .25) !important;<br>
+  --classB: var(--classC) !important;<br>
+  --classA: #3c3e44;<br>
+  --secondary-color-darkest: var(--backgroundA);<br>
+  --box-shadow: 0 0 black !important;<br>
+  --minor: #777 !important;<br>
+  --routine: var(--minor) !important;<br>
+  --classD: #000 !important;<br>
+
+  --color-text-primary: #c9d1d9;<br>
+  --color-bg-canvas: #0d1117;<br>
+  --toggle-thuumb-bg: #6e40c9;<br>
+  --toggle-track-border: #3c1e70;<br>
+  --toggle-track-bg: #271052;<br>
+}"));
+        $form->addInput($diyadmincss);
     }
 
     /**
@@ -164,14 +222,18 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             } else {
                 $tx = $url . 'img/user.png';
             }
+            $tx .= 's=100';
             $options = Helper::options();
+            $plugin_options = Helper::options()->plugin('SimpleAdmin');
+            $avatar = empty($plugin_options->avatar)?$tx:$plugin_options->avatar;
+            $diyadmincss = $plugin_options->diyadmincss;
             $hed = $hed . '
             <link rel="stylesheet" href="' . $url . 'css/user.min.css">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_1159885_cgwht2i4i9m.css">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_2348538_kz7l6lrb8h.css">
             <script>
                 const UserLink_="' . $options->adminUrl . '/profile.php";
-                const UserPic_="' . $tx . '";
+                const UserPic_="' . $avatar . '";
                 const AdminLink_="' . $options->adminUrl . '";
                 const SiteLink_="' . $options->siteUrl . '";
                 const UserName_="' . $user->screenName . '";
@@ -187,7 +249,9 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
                     plugins:"'. $options->adminUrl.'plugins.php'.'",
                     options_general:"'. $options->adminUrl.'options-general.php'.'",
                 }
-            </script>';
+            </script>
+            <style>'.$diyadmincss.'</style>
+            ';
         }
         return $hed;
     }

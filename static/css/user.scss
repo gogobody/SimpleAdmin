@@ -11455,20 +11455,20 @@ aqua.css end
   color-scheme: light;
   --background: #f1f5f8;
   --backgroundA: #fff;
-  --theme: "#4770db";
+  --theme: #4770db;
   --element: #409eff;
-  --classA: '#dcdfe6';
-  --classB: '#e4e7ed';
-  --classC: '#ebeef5';
-  --classD: '#f2f6fc';
-  --main: '#303133';
-  --routine: '#606266';
-  --minor: '#6e7075';
-  --seat: '#c0c4cc';
-  --success: '#67c23a';
-  --warning: '#e6a23c';
-  --danger: '#f56c6c';
-  --info: '#909399';
+  --classA: #dcdfe6;
+  --classB: #e4e7ed;
+  --classC: #ebeef5;
+  --classD: #f2f6fc;
+  --main: #303133;
+  --routine: #606266;
+  --minor: #6e7075;
+  --seat: #c0c4cc;
+  --success: #67c23a;
+  --warning: #e6a23c;
+  --danger: #f56c6c;
+  --info: #909399;
   --WhiteDark: #fff;
   --WhiteDarkRe: #000;
   --box-shadow-weight: 4px 0 25px 0 #e5ecf2;
@@ -11649,8 +11649,12 @@ aqua.css end
   .card{
     background:var(--background);
   }
+  .typecho-post-area #text{
+    color:var(--color-text-primary);
+  }
+
   // joe
-  .j-setting-contain>form .j-setting-content li .description{
+  .j-setting-contain>form .j-setting-content li .description,.joe_config>form .joe_content li .typecho-label{
     background-color: var(--background)!important;
   }
   .j-setting-contain>form .j-setting-content li select{
@@ -11667,6 +11671,9 @@ aqua.css end
   }
   .j-setting-contain .j-aside .j-setting-tab li:hover{
     background: var(--classA);
+  }
+  .joe_config__aside,.joe_config>form,.joe_config>form .typecho-option,.joe_config>form .joe_content li .description{
+    background: var(--backgroundA)!important;
   }
 }
 
@@ -12636,4 +12643,11 @@ body {
 .typecho-page-title h2 {
   margin-right: -10px;
   margin-left: -10px
+}
+/* fix joe version 5.xx */
+.select{
+  padding: 0!important;
+  & > select{
+    line-height: initial!important;
+  }
 }

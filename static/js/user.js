@@ -22,7 +22,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.0.6';
+        return '1.0.7';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -108,7 +108,7 @@ class Simple{
         }
         let Mask = '<div class="mask"></div>';
         $("body div.main").prepend(Mask)
-        let UserInfo = "<div class=\"user-info\"><a href=\"" + AdminLink_ + "\"><img src=\"" + UserPic_ + "s=100\" /></a><p>欢迎您，<a href=\"" + AdminLink_ + "\">" + UserName_ + "</a></p></div>";
+        let UserInfo = "<div class=\"user-info\"><a href=\"" + AdminLink_ + "\"><img src=\"" + UserPic_ + "\" /></a><p>欢迎您，<a href=\"" + AdminLink_ + "\">" + UserName_ + "</a></p></div>";
         let HtmlText = ""
         if (UserGroup_ === "administrator") {
             HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"zm zm-zu\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-quanjushuxing\"></i>全局模块<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + one + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-zhuomiankuaijiefangshi\"></i>快捷操作<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + two + "</li></ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-leibie\"></i>内容管理<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + three + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-shezhi\"></i>网站设置<i class=\"zm zm-sanJiaoBottom right\"></i></a><ul class=\"menu-ul\">" + four + "</ul><li>" + five + "</ul></div>";
