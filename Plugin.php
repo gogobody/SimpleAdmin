@@ -6,7 +6,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  *
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.0.7
+ * @version 1.0.8
  * @link https://www.ijkxs.com
  */
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
