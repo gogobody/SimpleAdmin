@@ -3,10 +3,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 /**
  * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://www.ijkxs.com">即刻学术</a>
- *
+ * <div class="simpleAdminStyle"><a style="width:fit-content" id="simpleAdmin">版本检测中..</div>&nbsp;</div><style>.simpleAdminStyle{margin-top: 5px;}.simpleAdminStyle a{background: #4DABFF;padding: 5px;color: #fff;}</style>
+
+ * <script>var wxfversion="1.0.9";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/WxFans/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>wxfversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(wxfversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(wxfversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.0.8
+ * @version 1.0.9
  * @link https://www.ijkxs.com
  */
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
@@ -174,7 +176,24 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     public static function personalConfig(Typecho_Widget_Helper_Form $form)
     {
     }
-
+    public static function get_plugins_info(){
+        $plugin_name = 'SimpleAdmin'; //改成你的插件名
+        Typecho_Widget::widget('Widget_Plugins_List@activated', 'activated=1')->to($activatedPlugins);
+        $activatedPlugins = json_decode(json_encode($activatedPlugins),true);
+        $plugins_list = $activatedPlugins['stack'];
+        $plugins_info = array();
+        for ($i=0;$i<count($plugins_list);$i++){
+            if($plugins_list[$i]['title'] == $plugin_name){
+                $plugins_info = $plugins_list[$i];
+                break;
+            }
+        }
+        if(count($plugins_info)<1){
+            return false;
+        }else{
+            return $plugins_info['version'];
+        }
+    }
     /**
      * 插件实现方法
      *
@@ -227,8 +246,12 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             $plugin_options = Helper::options()->plugin('SimpleAdmin');
             $avatar = empty($plugin_options->avatar)?$tx:$plugin_options->avatar;
             $diyadmincss = $plugin_options->diyadmincss;
+            $version = SimpleAdmin_Plugin::get_plugins_info();
+
+            // 用户权利 是否有编辑者以上权利
+            $hasPermission = $user->pass('editor', true)?'1':'0';
             $hed = $hed . '
-            <link rel="stylesheet" href="' . $url . 'css/user.min.css">
+            <link rel="stylesheet" href="' . $url . 'css/user.min.css?version='.$version.'">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_1159885_cgwht2i4i9m.css">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_2348538_kz7l6lrb8h.css">
             <script>
@@ -248,7 +271,10 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
                     themes:"'. $options->adminUrl.'themes.php'.'",
                     plugins:"'. $options->adminUrl.'plugins.php'.'",
                     options_general:"'. $options->adminUrl.'options-general.php'.'",
+                    manage_posts:"'. $options->adminUrl.'manage-posts.php'.'",
+                    manage_comments:"'. $options->adminUrl.'manage-comments.php'.'"
                 }
+                const loginUser = {hasPermission:'.$hasPermission.'}
             </script>
             <style>'.$diyadmincss.'</style>
             ';
@@ -259,8 +285,9 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     public static function renderFooter()
     {
         $url = Helper::options()->pluginUrl . '/SimpleAdmin/static/';
+        $version = SimpleAdmin_Plugin::get_plugins_info();
         if (Typecho_Widget::widget('Widget_User')->hasLogin()) {
-            echo '<script src="' . $url . 'js/user.js"></script>';
+            echo '<script src="' . $url . 'js/user.min.js?version='.$version.'"></script>';
         } else {
             $url = Helper::options()->pluginUrl . '/SimpleAdmin/';
             $skin = Typecho_Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgfengge;

@@ -22,7 +22,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.0.8';
+        return '1.0.9';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -441,11 +441,19 @@ let Admin_index_page ={
     init:function () {
         let start_link = $('#start-link')
         let original_html = start_link.prop("outerHTML")
-        let html = '<div id="start-link" style="display:flex;flex-wrap: wrap">' +
-            `<ul class="card p-8 shadow-xl"><h3>内容管理：</h3><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_post}">撰写文章</a></li><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_page}">添加页面</a></li></ul>` +
-            `<ul class="card p-8 shadow-xl"><h3>主题管理：</h3><li class="btn btn-info btn-ghost btn-fill"><a href="${globalConfig.options_theme_page}">${globalConfig.theme} 主题设置</a></li><li class="btn btn-info btn-ghost btn-fill"><a href="${globalConfig.themes}">主题管理</a></li></ul>` +
-            `<ul class="card p-8 shadow-xl"><h3>其他：</h3><li class="btn btn-danger btn-ghost btn-fill"><a href="${globalConfig.plugins}">插件管理</a></li><li class="btn btn-danger btn-ghost btn-fill"><a href="${globalConfig.options_general}">系统设置</a></li></ul>` +
-            '</div>'
+        let html = ''
+        if (UserGroup_ === "administrator"){
+            html= '<div id="start-link" style="display:flex;flex-wrap: wrap">' +
+                `<ul class="card p-8 shadow-xl"><h3>内容管理：</h3><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_post}">撰写文章</a></li><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_page}">添加页面</a></li></ul>` +
+                `<ul class="card p-8 shadow-xl"><h3>主题管理：</h3><li class="btn btn-info btn-ghost btn-fill"><a href="${globalConfig.options_theme_page}">${globalConfig.theme} 主题设置</a></li><li class="btn btn-info btn-ghost btn-fill"><a href="${globalConfig.themes}">主题管理</a></li></ul>` +
+                `<ul class="card p-8 shadow-xl"><h3>其他：</h3><li class="btn btn-danger btn-ghost btn-fill"><a href="${globalConfig.plugins}">插件管理</a></li><li class="btn btn-danger btn-ghost btn-fill"><a href="${globalConfig.options_general}">系统设置</a></li></ul>` +
+                '</div>'
+        }else if (UserGroup_ === "editor" || UserGroup_ === "contributor"){
+            html= '<div id="start-link" style="display:flex;flex-wrap: wrap">' +
+                `<ul class="card p-8 shadow-xl"><h3>内容管理：</h3><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.write_post}">撰写文章</a></li><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.manage_posts}">管理文章</a></li><li class="btn btn-primary btn-ghost btn-fill"><a href="${globalConfig.manage_comments}">管理评论</a></li></ul>` +
+                '</div>'
+        }
+
         start_link.prop("outerHTML",html)
         // tepass 适配
         let tepass_icon = $('i.fa.fa-rmb')
