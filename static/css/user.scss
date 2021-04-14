@@ -44,7 +44,23 @@ aqua.css
   --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
   --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
   --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  --main:#52525c;
 }
+
+/**
+基础样式
+ */
+[data-color-mode=dark] {
+  --night-btn-light: #373f5f;
+  --night-btn-light-text:#bfc2cc;
+  --border-light:#e0e3ef;
+
+  button.btn{
+    background-color: var(--night-btn-light);
+    color: var(--night-btn-light-text);
+  }
+}
+
 
 button,
 input,
@@ -1516,7 +1532,6 @@ body {
   border-radius: 50%;
   background: var(--range-thumb-bg);
   border: 2px solid var(--range-thumb-border-color);
-  cursor: -webkit-grab;
   cursor: grab;
   -webkit-appearance: none;
   appearance: none;
@@ -1529,7 +1544,6 @@ body {
 }
 
 .form-control-range:active::-webkit-slider-thumb {
-  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 
@@ -11482,8 +11496,8 @@ aqua.css end
 
 [data-color-mode=dark] {
   color-scheme: dark;
-  --background: #191919 !important;
-  --backgroundA: #212121 !important;
+  --background: #192039 !important;
+  --backgroundA: #1f2745 !important;
   --WhiteDark: #000;
   --WhiteDarkRe: #fff;
   --box-shadow-weight: 1px 0 8px 0 #e5ecf2;
@@ -11506,7 +11520,7 @@ aqua.css end
 
 [data-color-mode=dark] {
   color: #c9d1d9;
-  background-color: var(--color-bg-canvas);
+  //background-color: var(--color-bg-canvas);
 
   .profile-color-logo {
     display: none;
@@ -11615,7 +11629,7 @@ aqua.css end
   .user-nav {
     li {
       ul {
-        background: #2b2b2b;
+        background: var(--night-btn-light);
       }
     }
   }
@@ -11630,10 +11644,10 @@ aqua.css end
     }
   }
   .typecho-list-table tbody tr:hover td{
-    background-color: #3a3a39;
+    background-color: var(--night-btn-light);
   }
   .typecho-theme-list tbody tr.current td{
-    background-color: #3f3f40;
+    background-color: var(--night-btn-light);
   }
   textarea{
     color: var(--main);
@@ -11652,7 +11666,9 @@ aqua.css end
   .typecho-post-area #text{
     color:var(--color-text-primary);
   }
-
+  .typecho-post-area #slug{
+    background: var(--night-btn-light)!important;
+  }
   // joe
   .j-setting-contain>form .j-setting-content li .description,.joe_config>form .joe_content li .typecho-label{
     background-color: var(--background)!important;
@@ -11805,7 +11821,8 @@ aqua.css end
 }
 
 body {
-  background: var(--background);
+  background: var(--background)!important;
+  background-color: var(--background)!important;
   color: var(--main);
 }
 
@@ -12322,7 +12339,7 @@ table.typecho-list-table.deactivate {
   thead {
     tr {
       th:nth-child(3) {
-        width: 3em;
+        width: 4em;
       }
 
       th:last-child {
@@ -12401,6 +12418,34 @@ body {
       }
     }
   }
+}
+td.form-check{
+  border-top: 0!important;
+}
+.comment-action{
+  a{
+    word-break: keep-all!important;
+  }
+}
+/**
+插件管理
+ */
+.manageplugins{
+  table.typecho-list-table.table{
+    tbody{
+      tr{
+        td:nth-child(5){
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+/**
+文章管理
+ */
+.manageposts{
+
 }
 /**
  * joe 主题后台适配

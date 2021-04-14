@@ -30,7 +30,8 @@ PC样式：
 
 ![](https://cdn.jsdelivr.net/gh/gogobody/blog-img/blogimg/20210112210213.png)
 
-![](https://cdn.jsdelivr.net/gh/gogobody/blog-img/blogimg/20210112210422.png)
+深色模式：
+![](https://cdn.jsdelivr.net/gh/gogobody/blog-img/blogimg/20210414162435.png)
 
 ![](https://cdn.jsdelivr.net/gh/gogobody/blog-img/blogimg/20210112210542.png)
 

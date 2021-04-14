@@ -8,7 +8,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * <script>var simversion="1.0.9";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.0.9
+ * @version 1.1.0
  * @link https://www.ijkxs.com
  */
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
@@ -22,6 +22,9 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
      */
     public static function activate()
     {
+        if (version_compare( phpversion(), '7.0.0', '<' ) ) {
+            throw new Typecho_Plugin_Exception('请升级到 php 7 以上');
+        }
         Typecho_Plugin::factory('admin/header.php')->header_1000 = array('SimpleAdmin_Plugin', 'renderHeader');
         Typecho_Plugin::factory('admin/footer.php')->end_1000 = array('SimpleAdmin_Plugin', 'renderFooter');
         if (file_exists("var/Widget/Menu.php")) {
