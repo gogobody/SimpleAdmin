@@ -5,12 +5,15 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://www.ijkxs.com">即刻学术</a>
  * <div class="simpleAdminStyle"><a style="width:fit-content" id="simpleAdmin">版本检测中..</div>&nbsp;</div><style>.simpleAdminStyle{margin-top: 5px;}.simpleAdminStyle a{background: #4DABFF;padding: 5px;color: #fff;}</style>
 
- * <script>var simversion="1.0.9";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
+ * <script>var simversion="1.1.1";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.1.0
+ * @version 1.1.1
  * @link https://www.ijkxs.com
  */
+
+require_once 'utils/utils.php';
+
 class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
 {
     /**
@@ -233,18 +236,11 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             $menu = Typecho_Widget::widget('Widget_Menu')->to($menu);
             $email = $user->mail;
             if ($email) {
-                $c = strtolower($email);
-                $f = str_replace('@qq.com', '', $c);
-                if (strstr($c, "qq.com") && is_numeric($f) && strlen($f) < 11 && strlen($f) > 4) {
-                    $tx = '//q1.qlogo.cn/g?b=qq&nk=' . $f . '&';
-                } else {
-                    $d = md5($c);
-                    $tx = '//' . 'cdn.v2ex.com/gravatar' . '/' . $d . '?';
-                }
+                $tx = _AdminGetAvatarByMail($email);
             } else {
                 $tx = $url . 'img/user.png';
             }
-            $tx .= 's=100';
+
             $options = Helper::options();
             $plugin_options = Helper::options()->plugin('SimpleAdmin');
             $avatar = empty($plugin_options->avatar)?$tx:$plugin_options->avatar;
@@ -257,6 +253,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             <link rel="stylesheet" href="' . $url . 'css/user.min.css?version='.$version.'">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_1159885_cgwht2i4i9m.css">
             <link rel="stylesheet" href="//at.alicdn.com/t/font_2348538_kz7l6lrb8h.css">
+            
             <script>
                 const UserLink_="' . $options->adminUrl . '/profile.php";
                 const UserPic_="' . $avatar . '";

@@ -22,7 +22,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.1.0';
+        return '1.1.1';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
