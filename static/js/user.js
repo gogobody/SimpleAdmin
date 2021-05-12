@@ -16,13 +16,14 @@ function getElementsClass(classnames) {
             }
         }
     }
+
     return classobj;
 }
 class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.1.1';
+        return '1.1.3';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -410,6 +411,105 @@ class Simple{
                 '<p><em>SimpleAdmin</em> 是一款即插即用的typecho后台美化插件。建议使用 php7 以上版本。</p><p>由gogobody修改自<a href="https://xwsir.cn">小王先森</a></p><p>更新地址：<a href="https://www.ijkxs.com">即刻学术</p></a></p>' +
                 '<p id="check-update"></p></div></div>';
             $(".typecho-dashboard").append(tmpHtml)
+            $("body").append('<a id="modalinfo" href="#animatedModal"><svg t="1620821147012" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1938" width="18" height="18"><path d="M640.344 876.015C618.737 925.452 569.404 960 512 960c-57.403 0-106.737-34.548-128.344-83.985h256.688zM120 820v-56h84V428c0-150.986 108.642-276.597 252.017-302.925L456 114.4c0-27.835 25.072-50.4 56-50.4s56 22.565 56 50.4l0.012 10.68c140.754 25.86 248.026 147.41 251.88 294.71L820 428v336h84v56H120z" fill="#ffffff" p-id="1939"></path></svg></a>\n' +
+                '<div id="animatedModal" class="">\n' +
+                '<div id="btn-close-modal" class="close-animatedModal"><button class="btn btn-primary btn-ghost btn-offset">关闭</button></div>\n' +
+                '<div class="modal-content"><div class="container" style="margin-top: 100px"><div class="recommendmodal">更多推荐</div><hr class="divider" style="--divider-text: \"\";--divider-text-align: center">' +
+                            '<div class="flex flex-wrap">\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/3016.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">小程序</div>\n' +
+                            '<div class="my-2 font-bold">OneTypecho - Typecho多端小程序开源！by 即刻学术</div>\n' +
+                            '<div class="my-2 text-sm">Typecho 小程序 UniApp 版本.</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/2869.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-info uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">typecho 免登陆采集辅助插件 IjkxsDatas</div>\n' +
+                            '<div class="my-2 text-sm">IjkxsDatas 插件为 typecho 采集辅助插件，支持免登录发布文章，图片下载等功能。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/428.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">积分下载插件 for typecho</div>\n' +
+                            '<div class="my-2 text-sm">Typecho 积分下载插件。支持Tepass。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/185.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-info uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">Typecho头图美化插件 ThumbOptimizer</div>\n' +
+                            '<div class="my-2 text-sm">Typecho头图美化插件 ThumbOptimizer 是一款头图美化插件。对于资源型博客能很好的统一头图样式。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/426.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">主题</div>\n' +
+                            '<div class="my-2 font-bold">WebStack for typecho 导航主题即刻修改版</div>\n' +
+                            '<div class="my-2 text-sm">基于WebStack.cc 开发， 支持 typecho ，无需改动源码。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/375.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-info uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">WxFans 一款 typecho 微信公账号涨粉插件，支持动态验证码</div>\n' +
+                            '<div class="my-2 text-sm">一款 typecho 微信公账号涨粉插件，支持动态验证码。下载后插件文件夹改名为 WxFans 后启用。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/335.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">TypechoLaTeX 一款typecho数学公式插件</div>\n' +
+                            '<div class="my-2 text-sm">typecho 数学公式插件都有点问题，或者版本过于陈旧，比如mathjax 都升级到3.0了，为了更好的些 latex 于是自己捣鼓了一个插件，现分享供大家使用。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/288.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-info uppercase rounded-lg">单页</div>\n' +
+                            '<div class="my-2 font-bold"> typecho 时光机单页 typecho-whisper</div>\n' +
+                            '<div class="my-2 text-sm">修改自网上的 handsome 6.0 开心版。单页适用于任何 typecho 主题。且不会对原来的主题产生任何影响。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/285.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">单页</div>\n' +
+                            '<div class="my-2 font-bold">typecho github单页</div>\n' +
+                            '<div class="my-2 text-sm">即刻学术修改的 github单页面。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/178.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-info uppercase rounded-lg">小程序</div>\n' +
+                            '<div class="my-2 font-bold">TWallpaper 一款typecho壁纸小程序含 typecho 配套插件</div>\n' +
+                            '<div class="my-2 text-sm">typecho 第一款壁纸小程序TWallpaper，支持流量主，含配套typecho插件。另本博客也提供了图片采集教程。详见采集教程。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/135.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">Typecho 缓存插件 TpCache 魔改版 by gogobody</div>\n' +
+                            '<div class="my-2 text-sm">超级缓存插件，支持redis、memcache。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/95.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-info uppercase rounded-lg">小程序</div>\n' +
+                            '<div class="my-2 font-bold">typecho 邮件mail插件 LoveKKCommentModify 美化版</div>\n' +
+                            '<div class="my-2 text-sm">LoveKKCommentModify是一款Typecho邮件通知类插件，支持SMTP、Send Cloud、阿里云邮件推送三种邮件通知方式。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '<div class="w-64 m-8 overflow-hidden bg-white rounded shadow-md">\n' +
+                            '<a class="modal-a" href="https://www.ijkxs.com/435.html"><div class="flex flex-col items-start p-4">\n' +
+                            '<div class="tag tag-primary uppercase rounded-lg">插件</div>\n' +
+                            '<div class="my-2 font-bold">Typehco 首款简码插件 ShortCodes 发布！</div>\n' +
+                            '<div class="my-2 text-sm">typecho 简码插件 开源版，支多种简码。</div>\n' +
+                            '</div></a>\n' +
+                            '</div>\n' +
+                            '</div>' +
+                '</div></div>\n' +
+                '    </div>')
         }
     }
     mobile_nav_init(){
