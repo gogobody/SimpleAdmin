@@ -12757,3 +12757,10 @@ td.form-check{
 .modal-a:hover{
   text-decoration: none;
 }
+@media all and (max-width: 500px) {
+  #modalinfo{
+    right: 11px;
+    bottom: 11px;
+    opacity: 0.7;
+  }
+}
