@@ -28,8 +28,8 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
         if (version_compare( phpversion(), '7.0.0', '<' ) ) {
             throw new Typecho_Plugin_Exception('请升级到 php 7 以上');
         }
-        Typecho_Plugin::factory('admin/header.php')->header_1000 = array('SimpleAdmin_Plugin', 'renderHeader');
-        Typecho_Plugin::factory('admin/footer.php')->end_1000 = array('SimpleAdmin_Plugin', 'renderFooter');
+        Typecho_Plugin::factory('admin/header.php')->header_1011 = array('SimpleAdmin_Plugin', 'renderHeader');
+        Typecho_Plugin::factory('admin/footer.php')->end_1011 = array('SimpleAdmin_Plugin', 'renderFooter');
         if (file_exists("var/Widget/Menu.php")) {
             //挂载menu.php
             rename("var/Widget/Menu.php", "var/Widget/Menu.php.bak");
