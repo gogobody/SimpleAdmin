@@ -1369,7 +1369,7 @@ body {
   --radio-checked-bg: var(--primary-color);
   --radio-disabled-bg: var(--secondary-color-lighter);
   --radio-disabled-checked-bg: var(--secondary-color-darker);
-  width: var(--radio-width);
+  width: var(--radio-width) !important;
   height: var(--radio-width);
   position: relative;
   background: var(--radio-checked-bg);
@@ -12052,6 +12052,9 @@ a {
 
 .user-nav {
   padding-top: 30px;
+  &>ul{
+    padding-left: 0;
+  }
 
   li {
     line-height: 40px;
@@ -12506,6 +12509,11 @@ td.form-check{
 }
 
 @media all and (max-width: 600px) {
+  .typecho-head-nav{
+    .menu-bar{
+      display: none!important;
+    }
+  }
   .user-info {
     display: none
   }
