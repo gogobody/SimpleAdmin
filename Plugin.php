@@ -188,7 +188,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
         $activatedPlugins = json_decode(json_encode($activatedPlugins),true);
         $plugins_list = $activatedPlugins['stack'];
         $plugins_info = array();
-        for ($i=0;$i<count($plugins_list);$i++){
+        for ($i=0;$i<count((array)$plugins_list);$i++){
             if($plugins_list[$i]['title'] == $plugin_name){
                 $plugins_info = $plugins_list[$i];
                 break;
@@ -265,14 +265,14 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
                 const MenuTitle_="' . strip_tags($menu->title) . '";
                 const globalConfig = {
                     theme:"'. $options->theme.'",
-                    write_post:"'. $options->adminUrl.'write-post.php'.'",
-                    write_page:"'. $options->adminUrl.'write-page.php'.'",
-                    options_theme_page:"'. $options->adminUrl.'options-theme.php'.'",
-                    themes:"'. $options->adminUrl.'themes.php'.'",
-                    plugins:"'. $options->adminUrl.'plugins.php'.'",
-                    options_general:"'. $options->adminUrl.'options-general.php'.'",
-                    manage_posts:"'. $options->adminUrl.'manage-posts.php'.'",
-                    manage_comments:"'. $options->adminUrl.'manage-comments.php'.'"
+                    write_post:"'. $options->adminUrl.'/write-post.php'.'",
+                    write_page:"'. $options->adminUrl.'/write-page.php'.'",
+                    options_theme_page:"'. $options->adminUrl.'/options-theme.php'.'",
+                    themes:"'. $options->adminUrl.'/themes.php'.'",
+                    plugins:"'. $options->adminUrl.'/plugins.php'.'",
+                    options_general:"'. $options->adminUrl.'/options-general.php'.'",
+                    manage_posts:"'. $options->adminUrl.'/manage-posts.php'.'",
+                    manage_comments:"'. $options->adminUrl.'/manage-comments.php'.'"
                 }
                 const loginUser = {hasPermission:'.$hasPermission.'}
             </script>
