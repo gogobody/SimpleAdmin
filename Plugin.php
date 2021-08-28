@@ -191,7 +191,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
 
         $plugins_list = $activatedPlugins["\0*\0stack"];
         $plugins_info = array();
-        for ($i=0;$i<count($plugins_list);$i++){
+        for ($i=0;$i<count((array)$plugins_list);$i++){
             if($plugins_list[$i]['title'] == $plugin_name){
                 $plugins_info = $plugins_list[$i];
                 break;
