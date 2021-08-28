@@ -5,10 +5,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://www.ijkxs.com">即刻学术</a>
  * <div class="simpleAdminStyle"><a style="width:fit-content" id="simpleAdmin">版本检测中..</div>&nbsp;</div><style>.simpleAdminStyle{margin-top: 5px;}.simpleAdminStyle a{background: #4DABFF;padding: 5px;color: #fff;}</style>
 
- * <script>var simversion="1.1.6";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
+ * <script>var simversion="1.1.7";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.1.6
+ * @version 1.1.7
  * @link https://www.ijkxs.com
  */
 
@@ -185,8 +185,11 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     public static function get_plugins_info(){
         $plugin_name = 'SimpleAdmin'; //改成你的插件名
         Typecho_Widget::widget('Widget_Plugins_List@activated', 'activated=1')->to($activatedPlugins);
-        $activatedPlugins = json_decode(json_encode($activatedPlugins),true);
-        $plugins_list = $activatedPlugins['stack'];
+        $activatedPlugins=(array)$activatedPlugins; // 获取 protect 数据
+
+//        $activatedPlugins = json_decode(json_encode($activatedPlugins),true);
+
+        $plugins_list = $activatedPlugins["\0*\0stack"];
         $plugins_info = array();
         for ($i=0;$i<count($plugins_list);$i++){
             if($plugins_list[$i]['title'] == $plugin_name){
@@ -257,22 +260,22 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             <script>
                 const UserLink_="' . $options->adminUrl . '/profile.php";
                 const UserPic_="' . $avatar . '";
-                const AdminLink_="' . $options->adminUrl . '";
-                const SiteLink_="' . $options->siteUrl . '";
+                const AdminLink_="' . $options->adminUrl . '/";
+                const SiteLink_="' . $options->siteUrl . '/";
                 const UserName_="' . $user->screenName . '";
                 const UserGroup_="' . $user->group . '";
                 const SiteName_="' . $options->title . '";
                 const MenuTitle_="' . strip_tags($menu->title) . '";
                 const globalConfig = {
                     theme:"'. $options->theme.'",
-                    write_post:"'. $options->adminUrl.'write-post.php'.'",
-                    write_page:"'. $options->adminUrl.'write-page.php'.'",
-                    options_theme_page:"'. $options->adminUrl.'options-theme.php'.'",
-                    themes:"'. $options->adminUrl.'themes.php'.'",
-                    plugins:"'. $options->adminUrl.'plugins.php'.'",
-                    options_general:"'. $options->adminUrl.'options-general.php'.'",
-                    manage_posts:"'. $options->adminUrl.'manage-posts.php'.'",
-                    manage_comments:"'. $options->adminUrl.'manage-comments.php'.'"
+                    write_post:"'. $options->adminUrl.'/write-post.php'.'",
+                    write_page:"'. $options->adminUrl.'/write-page.php'.'",
+                    options_theme_page:"'. $options->adminUrl.'/options-theme.php'.'",
+                    themes:"'. $options->adminUrl.'/themes.php'.'",
+                    plugins:"'. $options->adminUrl.'/plugins.php'.'",
+                    options_general:"'. $options->adminUrl.'/options-general.php'.'",
+                    manage_posts:"'. $options->adminUrl.'/manage-posts.php'.'",
+                    manage_comments:"'. $options->adminUrl.'/manage-comments.php'.'"
                 }
                 const loginUser = {hasPermission:'.$hasPermission.'}
             </script>

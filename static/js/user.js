@@ -23,7 +23,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.1.6';
+        return '1.1.7';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -72,7 +72,7 @@ class Simple{
         this.managetags_page_init()
         this.manages_plugins_init()
         this.mobile_nav_init()
-
+        this.finally()
         SimpleUtils.update_detec()
     }
     global_init(){
@@ -169,7 +169,7 @@ class Simple{
                 let avatar = getElementsClass("profile-avatar")[0];
                 let tmppic = UserPic_.replace('s=100','s=640')
                 avatar.setAttribute("src", tmppic);
-                avatar.style.width = "150px";
+                // avatar.style.width = "150px";
             }
         } else {
             let LoginMain = getElementsClass("i-logo")[0];
@@ -253,6 +253,12 @@ class Simple{
         } else if (MenuTitle_ === "管理标签") {
             $("body").addClass("managetags")
         }
+    }
+    // 最后要做的
+    finally(){
+        // remove all return in ty 1.20
+        $('.user-nav li[class="return"]').remove()
+
     }
     comments_page_init(){
         Comments_page.filter_comments()
@@ -535,6 +541,8 @@ class Simple{
             })
         }
     }
+    // finally
+
 
 }
 let Admin_index_page ={

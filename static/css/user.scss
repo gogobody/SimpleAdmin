@@ -11359,9 +11359,9 @@ body {
 }
 
 .form-check {
-  display: flex;
+  //display: flex;
   align-items: center;
-  margin: 12px 0;
+  //margin: 12px 0;
 }
 
 .form-check-inline {
@@ -12425,9 +12425,29 @@ body {
       }
     }
   }
+  table.typecho-list-table.table{
+    table-layout: auto;
+    tbody{
+      tr{
+        th{
+          word-break: keep-all;
+        }
+        td{
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .typecho-list-operate{
+    form[method="get"]{
+      width:100%;
+    }
+  }
 }
 td.form-check{
-  border-top: 0!important;
+  //border-top: 0!important;
+  display: table-cell;
+  line-height: initial;
 }
 .comment-action{
   a{
