@@ -5,10 +5,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://www.ijkxs.com">即刻学术</a>
  * <div class="simpleAdminStyle"><a style="width:fit-content" id="simpleAdmin">版本检测中..</div>&nbsp;</div><style>.simpleAdminStyle{margin-top: 5px;}.simpleAdminStyle a{background: #4DABFF;padding: 5px;color: #fff;}</style>
 
- * <script>var simversion="1.1.8";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
+ * <script>var simversion="1.1.9";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.1.8
+ * @version 1.1.9
  * @link https://www.ijkxs.com
  */
 
@@ -36,9 +36,15 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             copy("usr/plugins/SimpleAdmin/var/Widget/Menu.php", "var/Widget/Menu.php");
         }
         if (file_exists("admin/header.php")) {
-            //挂载header.php
             rename("admin/header.php", "admin/header.php.bak");
-            copy("usr/plugins/SimpleAdmin/admin/header.php", "admin/header.php");
+            if(version_compare(Typecho_Common::VERSION,'1.2.0') >=0){
+                //挂载header.php
+                copy("usr/plugins/SimpleAdmin/admin/header.php", "admin/header.php");
+            }else{
+                //挂载header.php
+                copy("usr/plugins/SimpleAdmin/admin/header-old.php", "admin/header.php");
+            }
+
         }
 
     }
@@ -74,11 +80,13 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
      */
     public static function config(Typecho_Widget_Helper_Form $form)
     {
+
         $options = Helper::options();
         $url = $options->pluginUrl . '/SimpleAdmin/static';
-        list($prefixVersion, $suffixVersion) = explode('/', $options->version);
+        list($prefixVersion,) = explode('/', $options->version);
+
         ?>
-        <link rel="stylesheet" href="<?php echo $url.'/css/login.min.css?v='.$suffixVersion ?>">
+        <link rel="stylesheet" href="<?php echo $url.'/css/login.min.css?v='.$prefixVersion ?>">
         <?php
         $zz1 = '<div class="zz">素雅山水</div>';
         $zz2 = '<div class="zz">蓝天群山</div>';
