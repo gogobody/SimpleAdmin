@@ -1,14 +1,19 @@
 <?php
+use Typecho\Common;
+use Typecho\Plugin;
+use Typecho\Plugin\Exception;
+use Typecho\Widget;
+
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 /**
  * SimpleAdmin 是一款即插即用的typecho后台美化插件，修改自<a href="https://xwsir.cn">小王先生</a>，更新地址：<a href="https://www.ijkxs.com">即刻学术</a>
  * <div class="simpleAdminStyle"><a style="width:fit-content" id="simpleAdmin">版本检测中..</div>&nbsp;</div><style>.simpleAdminStyle{margin-top: 5px;}.simpleAdminStyle a{background: #4DABFF;padding: 5px;color: #fff;}</style>
 
- * <script>var simversion="1.1.9";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
+ * <script>var simversion="1.2.0";function update_detec(){var container=document.getElementById("simpleAdmin");if(!container){return}var ajax=new XMLHttpRequest();container.style.display="block";ajax.open("get","https://api.github.com/repos/gogobody/SimpleAdmin/releases/latest");ajax.send();ajax.onreadystatechange=function(){if(ajax.readyState===4&&ajax.status===200){var obj=JSON.parse(ajax.responseText);var newest=obj.tag_name;if(newest>simversion){container.innerHTML="发现新主题版本："+obj.name+'。下载地址：<a href="'+obj.zipball_url+'">点击下载</a>'+"<br>您目前的版本:"+String(simversion)+"。"+'<a target="_blank" href="'+obj.html_url+'">👉查看新版亮点</a>'}else{container.innerHTML="您目前的版本:"+String(simversion)+"。"+"您目前使用的是最新版。"}}}};update_detec();</script>
  * @package SimpleAdmin
  * @author gogobody
- * @version 1.1.9
+ * @version 1.2.0
  * @link https://www.ijkxs.com
  */
 
@@ -26,18 +31,17 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     public static function activate()
     {
         if (version_compare( phpversion(), '7.0.0', '<' ) ) {
-            throw new Typecho_Plugin_Exception('请升级到 php 7 以上');
+            throw new Exception('请升级到 php 7 以上');
         }
-        Typecho_Plugin::factory('admin/header.php')->header_1011 = array('SimpleAdmin_Plugin', 'renderHeader');
-        Typecho_Plugin::factory('admin/footer.php')->end_1011 = array('SimpleAdmin_Plugin', 'renderFooter');
-        if (file_exists("var/Widget/Menu.php")) {
-            //挂载menu.php
-            rename("var/Widget/Menu.php", "var/Widget/Menu.php.bak");
-            copy("usr/plugins/SimpleAdmin/var/Widget/Menu.php", "var/Widget/Menu.php");
+        if(version_compare(Common::VERSION,'1.2.0') < 0){
+            throw new Exception('请更新typecho到 1.2.0 以上');
         }
+        Plugin::factory('admin/header.php')->header_1011 = array('SimpleAdmin_Plugin', 'renderHeader');
+        Plugin::factory('admin/footer.php')->end_1011 = array('SimpleAdmin_Plugin', 'renderFooter');
+
         if (file_exists("admin/header.php")) {
             rename("admin/header.php", "admin/header.php.bak");
-            if(version_compare(Typecho_Common::VERSION,'1.2.0') >=0){
+            if(version_compare(Common::VERSION,'1.2.0') >=0){
                 //挂载header.php
                 copy("usr/plugins/SimpleAdmin/admin/header.php", "admin/header.php");
             }else{
@@ -192,7 +196,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     }
     public static function get_plugins_info(){
         $plugin_name = 'SimpleAdmin'; //改成你的插件名
-        Typecho_Widget::widget('Widget_Plugins_List@activated', 'activated=1')->to($activatedPlugins);
+        Widget::widget('Widget_Plugins_List@activated', 'activated=1')->to($activatedPlugins);
         $activatedPlugins=(array)$activatedPlugins; // 获取 protect 数据
 
 //        $activatedPlugins = json_decode(json_encode($activatedPlugins),true);
@@ -223,16 +227,16 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     {
         $hed = !empty($new)?$new:$hed;
         $url = Helper::options()->pluginUrl . '/SimpleAdmin/static/';
-        if (!Typecho_Widget::widget('Widget_User')->hasLogin()) {
-            $skin = Typecho_Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgfengge;
-            $diycss = Typecho_Widget::widget('Widget_Options')->plugin('SimpleAdmin')->diycss;
+        if (!Widget::widget('Widget_User')->hasLogin()) {
+            $skin = Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgfengge;
+            $diycss = Widget::widget('Widget_Options')->plugin('SimpleAdmin')->diycss;
             if ($skin == 'kongbai') {
                 $hed = $hed . '<style>' . $diycss . '</style>';
             } else {
                 if ($skin == 'heike') {
                     $hed = $hed . '<link rel="stylesheet" href="' . $url . 'skin/' . $skin . '.css?20191125">';
                 } else {
-                    $bgUrl = Typecho_Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgUrl;
+                    $bgUrl = Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgUrl;
                     $zidingyi = "";
                     if ($bgUrl) {
                         $zidingyi = "<style>body,body::before{background-image: url(" . $bgUrl . ")}</style>";
@@ -243,8 +247,8 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             echo $hed;
         } else {
             define('__TYPECHO_GRAVATAR_PREFIX__', '//' . 'cdn.v2ex.com/gravatar' . '/');
-            $user = Typecho_Widget::widget('Widget_User');
-            $menu = Typecho_Widget::widget('Widget_Menu')->to($menu);
+            $user = Widget::widget('Widget_User');
+            $menu = Widget::widget('Widget_Menu')->to($menu);
             $email = $user->mail;
             if ($email) {
                 $tx = _AdminGetAvatarByMail($email);
@@ -266,24 +270,24 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             <link rel="stylesheet" href="//at.alicdn.com/t/font_2348538_kz7l6lrb8h.css">
             <link rel="stylesheet" href="' . $url . 'css/animate.min.css?version='.$version.'">
             <script>
-                const UserLink_="' . $options->adminUrl . '/profile.php";
+                const UserLink_="' . $options->adminUrl . 'profile.php";
                 const UserPic_="' . $avatar . '";
                 const AdminLink_="' . $options->adminUrl . '";
-                const SiteLink_="' . $options->siteUrl . '/";
+                const SiteLink_="' . $options->siteUrl . '";
                 const UserName_="' . $user->screenName . '";
                 const UserGroup_="' . $user->group . '";
                 const SiteName_="' . $options->title . '";
                 const MenuTitle_="' . strip_tags($menu->title) . '";
                 const globalConfig = {
                     theme:"'. $options->theme.'",
-                    write_post:"'. $options->adminUrl.'/write-post.php'.'",
-                    write_page:"'. $options->adminUrl.'/write-page.php'.'",
-                    options_theme_page:"'. $options->adminUrl.'/options-theme.php'.'",
-                    themes:"'. $options->adminUrl.'/themes.php'.'",
-                    plugins:"'. $options->adminUrl.'/plugins.php'.'",
-                    options_general:"'. $options->adminUrl.'/options-general.php'.'",
-                    manage_posts:"'. $options->adminUrl.'/manage-posts.php'.'",
-                    manage_comments:"'. $options->adminUrl.'/manage-comments.php'.'"
+                    write_post:"'. $options->adminUrl.'write-post.php'.'",
+                    write_page:"'. $options->adminUrl.'write-page.php'.'",
+                    options_theme_page:"'. $options->adminUrl.'options-theme.php'.'",
+                    themes:"'. $options->adminUrl.'themes.php'.'",
+                    plugins:"'. $options->adminUrl.'plugins.php'.'",
+                    options_general:"'. $options->adminUrl.'options-general.php'.'",
+                    manage_posts:"'. $options->adminUrl.'manage-posts.php'.'",
+                    manage_comments:"'. $options->adminUrl.'manage-comments.php'.'"
                 }
                 const loginUser = {hasPermission:'.$hasPermission.'}
             </script>
@@ -297,13 +301,13 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
     {
         $url = Helper::options()->pluginUrl . '/SimpleAdmin/static/';
         $version = SimpleAdmin_Plugin::get_plugins_info();
-        if (Typecho_Widget::widget('Widget_User')->hasLogin()) {
+        if (Widget::widget('Widget_User')->hasLogin()) {
             echo '<script src="' . $url . 'js/user.min.js?version='.$version.'"></script>
-<script src="https://cdn.jsdelivr.net/gh/joaopereirawd/animatedModal.js/animatedModal.min.js"></script>
+<script src="' . $url . 'js/animatedModal.min.js"></script>
 <script>$(document).ready(function(){if($("#modalinfo").length>0){$("#modalinfo").animatedModal();}});</script>';
         } else {
             $url = Helper::options()->pluginUrl . '/SimpleAdmin/';
-            $skin = Typecho_Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgfengge;
+            $skin = Widget::widget('Widget_Options')->plugin('SimpleAdmin')->bgfengge;
             $ft = '';
             if ($skin == 'heike') {
                 $ft = '<canvas id="canvas"></canvas><script type="text/javascript">window.onload=function(){var canvas=document.getElementById("canvas");var context=canvas.getContext("2d");var W=window.innerWidth;var H=window.innerHeight;canvas.width=W;canvas.height=H;var fontSize=16;var colunms=Math.floor(W/fontSize);var drops=[];for(var i=0;i<colunms;i++){drops.push(0)}var str="111001101000100010010001111001111000100010110001111001001011110110100000";function draw(){context.fillStyle="rgba(0,0,0,0.05)";context.fillRect(0,0,W,H);context.font="700 "+fontSize+"px  微软雅黑";context.fillStyle="#00cc33";for(var i=0;i<colunms;i++){var index=Math.floor(Math.random()*str.length);var x=i*fontSize;var y=drops[i]*fontSize;context.fillText(str[index],x,y);if(y>=canvas.height&&Math.random()>0.99){drops[i]=0}drops[i]++}}function randColor(){var r=Math.floor(Math.random()*256);var g=Math.floor(Math.random()*256);var b=Math.floor(Math.random()*256);return"rgb("+r+","+g+","+b+")"}draw();setInterval(draw,30)};</script>';
