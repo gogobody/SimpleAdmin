@@ -105,7 +105,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
 
         $bgfengge = new Typecho_Widget_Helper_Form_Element_Radio(
             'bgfengge', array(
-            'suya' => _t('<div class="kuai"><img src="' . $url . '/images/suya.jpg" loading="lazy">' . $zz1 . '</div>'),
+            'suya' => '<div class="kuai"><img src="' . $url . '/images/suya.jpg" loading="lazy">' . $zz1 . '</div>',
             'BlueSkyAndMountains' => _t('<div class="kuai"><img src="' . $url . '/images/BlueSkyAndMountains.jpg" loading="lazy">' . $zz2 . '</div>'),
             'Earlyspringimpression' => _t('<div class="kuai"><img src="' . $url . '/images/Earlyspringimpression.jpg" loading="lazy">' . $zz3 . '</div>'),
             'MarineGiant' => _t('<div class="kuai"><img src="' . $url . '/images/MarineGiant.jpg" loading="lazy" loading="lazy">' . $zz4 . '</div>'),
@@ -115,7 +115,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             'heike' => _t('<div class="kuai tags"><img src="' . $url . '/images/heike.jpg" loading="lazy">' . $zz8 . '</div>'),
             'mohu' => _t('<div class="kuai"><img src="' . $url . '/images/mohu.jpg" loading="lazy">' . $zz9 . '</div>'),
             'kongbai' => _t('<div class="kuai"><img src="' . $url . '/images/kongbai.jpg" loading="lazy">' . $zz10 . '</div>'),
-        ), 'suya', _t('登陆/注册页面样式'), _t(''));
+        ), 'suya', '登陆/注册页面样式','');
         $bgfengge->setAttribute('id', 'yangshi');
         $form->addInput($bgfengge);
 
