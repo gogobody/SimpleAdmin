@@ -11642,6 +11642,8 @@ aqua.css end
     td {
       border-top: 1px solid var(--classC);
     }
+
+
   }
   .typecho-list-table tbody tr:hover td{
     background-color: var(--night-btn-light);
@@ -12435,6 +12437,9 @@ body {
         td{
           vertical-align: middle;
         }
+      }
+      tr.card{
+        border: none;
       }
     }
   }

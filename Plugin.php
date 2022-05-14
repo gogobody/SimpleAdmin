@@ -246,7 +246,7 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
             }
             echo $hed;
         } else {
-            define('__TYPECHO_GRAVATAR_PREFIX__', '//' . 'cdn.v2ex.com/gravatar' . '/');
+//            define('__TYPECHO_GRAVATAR_PREFIX__', '//' . 'cdn.v2ex.com/gravatar' . '/');
             $user = Widget::widget('Widget_User');
             $menu = Widget::widget('Widget_Menu')->to($menu);
             $email = $user->mail;
