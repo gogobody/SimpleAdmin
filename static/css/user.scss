@@ -1,6 +1,6 @@
 @charset "utf-8";
 *{
-  box-sizing: inherit;
+  //box-sizing: initial;
 }
 /**
 aqua.css
@@ -11681,7 +11681,7 @@ aqua.css end
   .j-setting-contain>form .j-setting-content li select{
     border:1px solid var(--classC);
   }
-  .select{
+  .sd-select{
     background: var(--background) !important;
   }
   .j-setting-contain>form .typecho-option{
@@ -11850,7 +11850,7 @@ a {
 }
 
 
-.select {
+.sd-select {
   display: block;
   position: relative;
   overflow: hidden;
@@ -11866,17 +11866,17 @@ a {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
-.select:before {
+.sd-select:before {
   top: 30%;
   border-bottom: 3px solid #7f9298;
 }
 
-.select:after {
+.sd-select:after {
   top: 60%;
   border-top: 3px solid #7f9298;
 }
 
-.select:before, .select:after {
+.sd-select:before, .sd-select:after {
   content: '';
   position: absolute;
   right: 7px;
@@ -11886,7 +11886,7 @@ a {
   border-right: 3px outset transparent;
 }
 
-.select > select {
+.sd-select > select {
   position: relative;
   z-index: 0;
   width: 100%;
@@ -11900,14 +11900,14 @@ a {
   -webkit-appearance: none;
 }
 
-.select-none {
+.sd-select-none {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.select-all {
+.sd-select-all {
   -webkit-user-select: all;
   -moz-user-select: all;
   -ms-user-select: all;
@@ -12413,7 +12413,7 @@ body {
           margin-right: 5px;
         }
 
-        li.select {
+        li.sd-select {
           width: 100px;
           padding: 0;
           height: 30px;
@@ -12457,6 +12457,15 @@ td.form-check{
 .comment-action{
   a{
     word-break: keep-all!important;
+  }
+}
+/*
+兼容 jkoptions
+*/
+body.options-plugin-theme{
+  .csf-sticky .csf-header-inner{
+    top:50px;
+    width: 1040px;
   }
 }
 /**
@@ -12648,7 +12657,7 @@ td.form-check{
           margin-bottom: 7px;
         }
 
-        li.select {
+        li.sd-select {
           margin-bottom: 7px;
         }
 
@@ -12727,7 +12736,7 @@ td.form-check{
   margin-left: -10px
 }
 /* fix joe version 5.xx */
-.select{
+.sd-select{
   padding: 0!important;
   & > select{
     line-height: initial!important;

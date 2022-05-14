@@ -23,7 +23,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.2.0';
+        return '1.2.1';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -253,6 +253,10 @@ class Simple{
         } else if (MenuTitle_ === "管理标签") {
             $("body").addClass("managetags")
         }
+        // 根据 URL 判断
+        if(location.href.search('options-plugin.php') || location.href.search('options-theme.php')){
+            $("body").addClass("options-plugin-theme")
+        }
     }
     // 最后要做的
     finally(){
@@ -344,6 +348,9 @@ class Simple{
     }
     input_init(){
         $("input[type=checkbox]").each(function (index,ele) {
+            if ($(ele).parents('.csf-fieldset').length > 0){ // 适配jkframework
+                return;
+            }
             if (!$(ele).hasClass("form-check-input")){
                 $(ele).addClass("form-check-input")
                 $(ele).parent().addClass("form-check")
@@ -351,6 +358,10 @@ class Simple{
             }
         })
         $("input[type=radio]").each(function (index,ele) {
+            if ($(ele).parents('.csf-fieldset').length > 0){ // 适配jkframework
+                return;
+            }
+
             if (!$(ele).hasClass("form-check-input")){
                 $(ele).addClass("form-check-input")
                 $(ele).parent("span").addClass("form-check")
@@ -358,6 +369,9 @@ class Simple{
             }
         })
         $("input[type=text]").each(function (index,ele) {
+            if ($(ele).parents('.csf-fieldset').length > 0){ // 适配jkframework
+                return;
+            }
             if (!$(ele).hasClass("form-control")){
                 $(ele).addClass("form-control")
             }
@@ -365,6 +379,9 @@ class Simple{
     }
     button_init(){
         $("button.btn").each(function (index,ele){
+            if ($(ele).parents('.csf-fieldset').length > 0){ // 适配jkframework
+                return;
+            }
             if ($(ele).hasClass("primary")){
                 $(ele).removeClass("primary")
                 $(ele).addClass("btn-primary btn-jelly")
@@ -378,8 +395,11 @@ class Simple{
     }
     select_init(){
         $("select").each(function (index,ele){
+            if ($(ele).parents('.csf-fieldset').length > 0){ // 适配jkframework
+                return;
+            }
             let tmp = $(ele).prop("outerHTML");
-            $(ele).prop('outerHTML','<li class="select">'+tmp+"</li>")
+            $(ele).prop('outerHTML','<li class="select sd-select">'+tmp+"</li>")
             // 自动隐藏密码框
             $('#visibility').change(function () {
                 var val = $(this).val(), password = $('#post-password');

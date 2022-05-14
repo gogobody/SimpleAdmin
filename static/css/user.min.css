@@ -1,7 +1,4 @@
 @charset "UTF-8";
-* {
-  box-sizing: inherit; }
-
 /**
 aqua.css
  */
@@ -8926,7 +8923,7 @@ aqua.css end
     background-color: var(--background) !important; }
   [data-color-mode=dark] .j-setting-contain > form .j-setting-content li select {
     border: 1px solid var(--classC); }
-  [data-color-mode=dark] .select {
+  [data-color-mode=dark] .sd-select {
     background: var(--background) !important; }
   [data-color-mode=dark] .j-setting-contain > form .typecho-option {
     border-top: 1px solid var(--classC) !important; }
@@ -9052,7 +9049,7 @@ a {
   -ms-transition: .5s all;
   color: #6777ef; }
 
-.select {
+.sd-select {
   display: block;
   position: relative;
   overflow: hidden;
@@ -9067,15 +9064,15 @@ a {
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); }
 
-.select:before {
+.sd-select:before {
   top: 30%;
   border-bottom: 3px solid #7f9298; }
 
-.select:after {
+.sd-select:after {
   top: 60%;
   border-top: 3px solid #7f9298; }
 
-.select:before, .select:after {
+.sd-select:before, .sd-select:after {
   content: '';
   position: absolute;
   right: 7px;
@@ -9084,7 +9081,7 @@ a {
   border-left: 3px outset transparent;
   border-right: 3px outset transparent; }
 
-.select > select {
+.sd-select > select {
   position: relative;
   z-index: 0;
   width: 100%;
@@ -9097,13 +9094,13 @@ a {
   border: 0;
   -webkit-appearance: none; }
 
-.select-none {
+.sd-select-none {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
 
-.select-all {
+.sd-select-all {
   -webkit-user-select: all;
   -moz-user-select: all;
   -ms-user-select: all;
@@ -9494,7 +9491,7 @@ body .typecho-list-operate form[method=get] .search {
     display: flex;
     height: 32px;
     margin-right: 5px; }
-  body .typecho-list-operate form[method=get] .search li.select {
+  body .typecho-list-operate form[method=get] .search li.sd-select {
     width: 100px;
     padding: 0;
     height: 30px;
@@ -9519,6 +9516,13 @@ td.form-check {
 
 .comment-action a {
   word-break: keep-all !important; }
+
+/*
+兼容 jkoptions
+*/
+body.options-plugin-theme .csf-sticky .csf-header-inner {
+  top: 50px;
+  width: 1040px; }
 
 /**
 插件管理
@@ -9667,7 +9671,7 @@ td.form-check {
     flex-direction: column; }
     body.manageposts .typecho-list-operate .search input.text-s {
       margin-bottom: 7px; }
-    body.manageposts .typecho-list-operate .search li.select {
+    body.manageposts .typecho-list-operate .search li.sd-select {
       margin-bottom: 7px; }
     body.manageposts .typecho-list-operate .search button.btn {
       width: 80px; }
@@ -9722,9 +9726,9 @@ td.form-check {
   margin-left: -10px; }
 
 /* fix joe version 5.xx */
-.select {
+.sd-select {
   padding: 0 !important; }
-  .select > select {
+  .sd-select > select {
     line-height: initial !important; }
 
 /*animate.css*/
