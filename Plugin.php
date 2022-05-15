@@ -33,15 +33,15 @@ class SimpleAdmin_Plugin implements Typecho_Plugin_Interface
         if (version_compare( phpversion(), '7.0.0', '<' ) ) {
             throw new Exception('请升级到 php 7 以上');
         }
-        if(version_compare(Common::VERSION,'1.2.1') < 0){
-            throw new Exception('请更新typecho到 1.2.1 以上');
+        if(version_compare(Common::VERSION,'1.2.0') < 0){
+            throw new Exception('请更新typecho到 1.2.0 以上');
         }
         Plugin::factory('admin/header.php')->header_1011 = array('SimpleAdmin_Plugin', 'renderHeader');
         Plugin::factory('admin/footer.php')->end_1011 = array('SimpleAdmin_Plugin', 'renderFooter');
 
         if (file_exists("admin/header.php")) {
             rename("admin/header.php", "admin/header.php.bak");
-            if(version_compare(Common::VERSION,'1.2.1') >=0){
+            if(version_compare(Common::VERSION,'1.2.0') >=0){
                 //挂载header.php
                 copy("usr/plugins/SimpleAdmin/admin/header.php", "admin/header.php");
             }else{
