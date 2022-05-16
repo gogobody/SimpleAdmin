@@ -11,7 +11,7 @@ $header = '<link rel="stylesheet" href="' . $options->adminStaticUrl('css', 'nor
 $header = Typecho_Plugin::factory('admin/header.php')->header($header);
 
 ?><!DOCTYPE HTML>
-<html data-color-mode="<?php if($_COOKIE['night']=='1')echo 'dark';else echo 'light'; ?>">
+<html data-color-mode="<?php if(array_key_exists('night', $_COOKIE) and $_COOKIE['night']=='1')echo 'dark';else echo 'light'; ?>">
 <head>
     <meta charset="<?php $options->charset(); ?>">
     <meta name="renderer" content="webkit">
