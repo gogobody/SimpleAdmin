@@ -23,7 +23,7 @@ class SimpleUtils {
     constructor() {
     }
     static getVersion(){
-        return '1.2.1';
+        return '1.2.2';
     }
     static update_detec() {
         let container = document.getElementById('check-update');
@@ -114,7 +114,7 @@ class Simple{
         if (UserGroup_ === "administrator") {
             HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"zm zm-zu\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-quanjushuxing\"></i>全局模块<i class=\"zm zm-sanJiaoBottom\"></i></a><ul class=\"menu-ul\">" + one + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-zhuomiankuaijiefangshi\"></i>快捷操作<i class=\"zm zm-sanJiaoBottom\"></i></a><ul class=\"menu-ul\">" + two + "</li></ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-leibie\"></i>内容管理<i class=\"zm zm-sanJiaoBottom\"></i></a><ul class=\"menu-ul\">" + three + "</ul></li><li class=\"menu-li\"><a href=\"javascript:;\"><i class=\"zm zm-shezhi\"></i>网站设置<i class=\"zm zm-sanJiaoBottom\"></i></a><ul class=\"menu-ul\">" + four + "</ul><li>" + five + "</ul></div>";
         } else if (UserGroup_ === "editor" || UserGroup_ === "contributor") {
-            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li><li><a href=\"" + AdminLink_ + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li><a href=\"" + AdminLink_ + "/manage-posts.php\"><i class=\"fa fa-cube\"></i>管理文章</a></li><li><a href=\"" + AdminLink_ + "/manage-comments.php\"><i class=\"fa fa-comments-o\"></i>管理评论</a></li></ul></div>";
+            HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li><li><a href=\"" + AdminLink_ + "write-post.php\"><i class=\"zm zm-bianji\"></i>撰写文章</a></li><li><a href=\"" + AdminLink_ + "manage-posts.php\"><i class=\"fa fa-cube\"></i>管理文章</a></li><li><a href=\"" + AdminLink_ + "manage-comments.php\"><i class=\"fa fa-comments-o\"></i>管理评论</a></li></ul></div>";
         } else {
             HtmlText = "<div class=\"user-nav\"><ul><li><a href=\"" + AdminLink_ + "index.php\"><i class=\"fa fa-dashboard\"></i>主控制台</a></li><li><a href=\"" + AdminLink_ + "profile.php\"><i class=\"fa fa-gear\"></i>个人设置</a></li></ul></div>";
         }
