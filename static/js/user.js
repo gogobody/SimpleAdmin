@@ -76,7 +76,7 @@ class Simple{
         SimpleUtils.update_detec()
     }
     global_init(){
-        let childCount = globalVars.ty_nav_list.children('.root').size();
+        let childCount = globalVars.ty_nav_list.children('.root').length;
         let one = '', two = '', three = '', four = '', five = '';
         globalVars.ty_nav_list.find('.child li').eq(0).each(function () {
             $(this).remove();
